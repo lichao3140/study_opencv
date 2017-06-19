@@ -1,5 +1,6 @@
 package com.lichao.opencv;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 /**
@@ -30,9 +31,24 @@ public class WhiteImageFilter extends AbstractImageOptionFilter{
 				int tg = (pixel >> 8) & 0xff;//绿色通道 green
 				int tb = (pixel & 0xff);//蓝色通道 blue
 				
-				tr = imageMath(tr);
-				tg = imageMath(tg);
-				tb = imageMath(tb);
+				//转换成ycbcr显示
+//				double[] ycbcr = ColorSpaceUtil.rgb2YCbCr(tr, tg, tb);
+//				int[] rgb = ColorSpaceUtil.YCbCr2rgb(ycbcr[0], ycbcr[1], ycbcr[2]);
+//				tr = rgb[0];
+//				tg = rgb[1];
+//				tb = rgb[2];
+				
+				float[] hsbvals = new float[3];
+				Color.RGBtoHSB(tr, tg, tb, hsbvals);
+				int color = Color.HSBtoRGB(hsbvals[0], hsbvals[1], hsbvals[2]);
+				Color c = new Color(color);
+				tr = c.getRed();
+				tg = c.getGreen();
+				tb = c.getBlue();
+				
+//				tr = imageMath(tr);
+//				tg = imageMath(tg);
+//				tb = imageMath(tb);
 				
 				pixels[index] = (ta << 24 | tr << 16 | tg << 8 | tb);
 			}
