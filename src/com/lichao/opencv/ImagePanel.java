@@ -47,14 +47,28 @@ public class ImagePanel extends JComponent implements ActionListener{
 		//灰度图片读取
 //		PixelStatstics ps = new PixelStatstics();
 //		ps.process(this.image);
+		
 		//图片像素运算
 //		ImageMathFilter imf = new ImageMathFilter();
 //		imf.setType(2);
 //		imf.setValue(2);
 //		imf.process(this.image);
+		
 		//美白与亮度提升	
-		WhiteImageFilter bif = new WhiteImageFilter();
-		bif.process(this.image);
+//		WhiteImageFilter bif = new WhiteImageFilter();
+//		bif.process(this.image);
+		
+		//灰度图像变彩色
+		File f = new File("F:\\opencv\\shejie.jpg");
+		try {
+			ColorFillFilter cff = new ColorFillFilter();
+			BufferedImage card = ImageIO.read(f);
+			cff.setColorCard(card);
+			cff.process(this.image);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel dstCM) {
@@ -80,7 +94,7 @@ public class ImagePanel extends JComponent implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		File file = new File("F:\\opencv\\gril.jpg");
+		File file = new File("F:\\opencv\\greygril.PNG");
 		try {
 			BufferedImage image = ImageIO.read(file);
 			JFrame frame = new JFrame();

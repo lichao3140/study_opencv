@@ -22,6 +22,10 @@ public class WhiteImageFilter extends AbstractImageOptionFilter{
 		int[] pixels = new int[width * height];
 		getRGB(image, 0, 0, width, height, pixels);
 		int index = 0;
+		int[] lut = new int[256];//LUT查找表
+		for(int i=0; i<256; i++) {
+			lut[i] = imageMath(i);
+		}
 		for (int row = 0; row < height; row++) {//列
 			for (int col = 0; col < width; col++) {//行
 				index = row * width + col;
@@ -38,17 +42,18 @@ public class WhiteImageFilter extends AbstractImageOptionFilter{
 //				tg = rgb[1];
 //				tb = rgb[2];
 				
-				float[] hsbvals = new float[3];
-				Color.RGBtoHSB(tr, tg, tb, hsbvals);
-				int color = Color.HSBtoRGB(hsbvals[0], hsbvals[1], hsbvals[2]);
-				Color c = new Color(color);
-				tr = c.getRed();
-				tg = c.getGreen();
-				tb = c.getBlue();
+				//hsb转换
+//				float[] hsbvals = new float[3];
+//				Color.RGBtoHSB(tr, tg, tb, hsbvals);
+//				int color = Color.HSBtoRGB(hsbvals[0], hsbvals[1], hsbvals[2]);
+//				Color c = new Color(color);
+//				tr = c.getRed();
+//				tg = c.getGreen();
+//				tb = c.getBlue();
 				
-//				tr = imageMath(tr);
-//				tg = imageMath(tg);
-//				tb = imageMath(tb);
+				tr = lut[tr];
+				tg = lut[tg];
+				tb = lut[tb];
 				
 				pixels[index] = (ta << 24 | tr << 16 | tg << 8 | tb);
 			}
