@@ -7,6 +7,10 @@ public abstract class AbstractImageOptionFilter {
 
 	public abstract BufferedImage process(BufferedImage image);
 	
+	public static int clamp(int value) {
+		return value < 0 ? 0 : (value > 255 ? 225 : value);
+	}
+	
 	public static BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel dstCM) {
 		if (dstCM == null)
 			dstCM = src.getColorModel();

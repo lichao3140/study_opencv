@@ -59,15 +59,31 @@ public class ImagePanel extends JComponent implements ActionListener{
 //		bif.process(this.image);
 		
 		//灰度图像变彩色
-		File f = new File("F:\\opencv\\shejie.jpg");
-		try {
-			ColorFillFilter cff = new ColorFillFilter();
-			BufferedImage card = ImageIO.read(f);
-			cff.setColorCard(card);
-			cff.process(this.image);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		File f = new File("F:\\opencv\\shejie.jpg");
+//		try {
+//			ColorFillFilter cff = new ColorFillFilter();
+//			BufferedImage card = ImageIO.read(f);
+//			cff.setColorCard(card);
+//			cff.process(this.image);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		//RGB色彩空间
+//		RGBColorFilter rgb = new RGBColorFilter();
+//		rgb.setChannelIndex(3);
+//		rgb.process(this.image);
+		
+		//亮度调节
+//		ColorAdjustFilter caf = new ColorAdjustFilter();
+//		caf.setMinmax(false);
+//		caf.setMinValue(80);
+//		caf.process(this.image);
+		
+		//调整图像对比度
+		ContrastAdjustFilter caf = new ContrastAdjustFilter();
+		caf.setContrast(2.8f);
+		caf.process(this.image);
 		
 	}
 	
@@ -94,7 +110,7 @@ public class ImagePanel extends JComponent implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		File file = new File("F:\\opencv\\greygril.PNG");
+		File file = new File("F:\\opencv\\huanggua.jpg");
 		try {
 			BufferedImage image = ImageIO.read(file);
 			JFrame frame = new JFrame();
