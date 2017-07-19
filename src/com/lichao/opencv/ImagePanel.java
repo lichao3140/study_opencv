@@ -131,8 +131,35 @@ public class ImagePanel extends JComponent implements ActionListener{
 //		}
 		
 		//直方图  均衡化
-		HistgramBalanceFilter hbf = new HistgramBalanceFilter();
-		resultImage = hbf.process(this.image);
+//		HistgramBalanceFilter hbf = new HistgramBalanceFilter();
+//		resultImage = hbf.process(this.image);
+		
+		//临近点插值
+//		NearestInterpolationFilter ntf = new NearestInterpolationFilter();
+//		resultImage = ntf.process(this.image);
+		
+		//双线性插值
+//		BilineInterpolationFilter bif = new BilineInterpolationFilter();
+//		resultImage = bif.process(this.image);
+		
+		//图像旋转
+//		RotateImageFilter rif = new RotateImageFilter();
+//		resultImage = rif.process(this.image);
+		
+		//图片翻转和平移
+//		FlipTranslateFilter ftf = new FlipTranslateFilter();
+//		resultImage = ftf.process(this.image);
+		
+		//图像灰度
+//		GrayFilter gf = new GrayFilter();
+//		resultImage = gf.process(this.image);
+		
+		//图像二值化
+//		BinaryFilter bf = new BinaryFilter();
+//		resultImage = bf.process(this.image);
+		
+		SinCityFilter scf = new SinCityFilter();
+		resultImage = scf.process(this.image);
 	}
 	
 	public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel dstCM) {
@@ -158,7 +185,7 @@ public class ImagePanel extends JComponent implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		File file = new File("F:\\opencv\\greygril.png");
+		File file = new File("F:\\opencv\\gril.jpg");
 		try {
 			BufferedImage image = ImageIO.read(file);
 			JFrame frame = new JFrame();
